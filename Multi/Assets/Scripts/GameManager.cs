@@ -63,8 +63,7 @@ namespace Com.MyCompany.MyGame {
             if (!PhotonNetwork.IsMasterClient) {
                 Debug.LogError ("PhotonNetwork : Trying to Load a level but we are not the master Client");
             }
-            Debug.LogFormat ("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
-            PhotonNetwork.LoadLevel ("Room for " + PhotonNetwork.CurrentRoom.PlayerCount);
+            PhotonNetwork.LoadLevel ("Game");
         }
 
         #endregion
