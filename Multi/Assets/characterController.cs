@@ -32,11 +32,7 @@ public class characterController : MonoBehaviourPunCallbacks {
 
     // Update is called once per frame
     void Update () {
-
-        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) {
-            return;
-        }
-        float translation = Input.GetAxis ("Vertical") * speed;
+         float translation = Input.GetAxis ("Vertical") * speed;
         float straffe = Input.GetAxis ("Horizontal") * speed;
         translation *= Time.deltaTime;
         straffe *= Time.deltaTime;
@@ -45,6 +41,10 @@ public class characterController : MonoBehaviourPunCallbacks {
 
         if (Input.GetKeyDown ("escape"))
             Cursor.lockState = CursorLockMode.None;
+
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) {
+            return;
+        }
     }
 
 }
