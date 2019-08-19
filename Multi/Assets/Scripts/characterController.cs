@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 
-public class characterController : MonoBehaviourPunCallbacks {
+public class characterController : MonoBehaviourPun {
 
     [Tooltip ("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
+
+    public Camera myCam;
 
     public float speed = 10.0F;
 
@@ -23,6 +25,9 @@ public class characterController : MonoBehaviourPunCallbacks {
         // #Important
         // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
         if (photonView.IsMine) {
+            if (myCam.enabled == false)
+                myCam.enabled = true;
+
             characterController.LocalPlayerInstance = this.gameObject;
         }
         // #Critical
@@ -32,8 +37,10 @@ public class characterController : MonoBehaviourPunCallbacks {
 
     // Update is called once per frame
     void Update () {
-        if(photonView.IsMine) {
-         float translation = Input.GetAxis ("Vertical") * speed;
+        if(photonView.IsMine == false && PhotonNetwork.IsConnected == true) {
+            return;
+        }
+        float translation = Input.GetAxis ("Vertical") * speed;
         float straffe = Input.GetAxis ("Horizontal") * speed;
         translation *= Time.deltaTime;
         straffe *= Time.deltaTime;
@@ -42,12 +49,7 @@ public class characterController : MonoBehaviourPunCallbacks {
 
         if (Input.GetKeyDown ("escape"))
             Cursor.lockState = CursorLockMode.None;
-
-        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) {
-            return;
-        }
-
-    }
+        
     }
 
 }
