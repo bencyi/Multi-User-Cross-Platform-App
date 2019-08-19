@@ -217,7 +217,19 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 823ada52ceac4df4ea5007e60da9de71, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2953919686589337630, guid: d1dcf25a4c85dee4a91bdc35bf7ac8f0, type: 3}
+    - {fileID: 2953919686017900019, guid: d1dcf25a4c85dee4a91bdc35bf7ac8f0, type: 3}
+    - {fileID: 2953919685893135279, guid: d1dcf25a4c85dee4a91bdc35bf7ac8f0, type: 3}
+    - {fileID: 2953919685835150361, guid: d1dcf25a4c85dee4a91bdc35bf7ac8f0, type: 3}
+    - {fileID: 2953919685493586755, guid: d1dcf25a4c85dee4a91bdc35bf7ac8f0, type: 3}
+    - {fileID: 2953919685068791175, guid: d1dcf25a4c85dee4a91bdc35bf7ac8f0, type: 3}
+    - {fileID: 2953919686589337618, guid: d1dcf25a4c85dee4a91bdc35bf7ac8f0, type: 3}
+    - {fileID: 2953919686017900023, guid: d1dcf25a4c85dee4a91bdc35bf7ac8f0, type: 3}
+    - {fileID: 2953919685893135267, guid: d1dcf25a4c85dee4a91bdc35bf7ac8f0, type: 3}
+    - {fileID: 2953919685835150365, guid: d1dcf25a4c85dee4a91bdc35bf7ac8f0, type: 3}
+    - {fileID: 2953919685493586759, guid: d1dcf25a4c85dee4a91bdc35bf7ac8f0, type: 3}
+    - {fileID: 2953919685068791291, guid: d1dcf25a4c85dee4a91bdc35bf7ac8f0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d1dcf25a4c85dee4a91bdc35bf7ac8f0, type: 3}
 --- !u!1 &449196808
 GameObject:
