@@ -25,9 +25,6 @@ public class characterController : MonoBehaviourPun {
         // #Important
         // used in GameManager.cs: we keep track of the localPlayer instance to prevent instantiation when levels are synchronized
         if (photonView.IsMine) {
-            if (myCam.enabled == false)
-                myCam.enabled = true;
-
             characterController.LocalPlayerInstance = this.gameObject;
         }
         // #Critical
@@ -37,20 +34,25 @@ public class characterController : MonoBehaviourPun {
 
     // Update is called once per frame
     void Update () {
-        float translation = Input.GetAxis ("Vertical") * speed;
-        float straffe = Input.GetAxis ("Horizontal") * speed;
-        translation *= Time.deltaTime;
-        straffe *= Time.deltaTime;
+        if (photonView.IsMine) {
+            if (myCam.enabled == false)
+                myCam.enabled = true;
 
-        transform.Translate (straffe, 0, translation);
+            float translation = Input.GetAxis ("Vertical") * speed;
+            float straffe = Input.GetAxis ("Horizontal") * speed;
+            translation *= Time.deltaTime;
+            straffe *= Time.deltaTime;
 
-        if(photonView.IsMine == false && PhotonNetwork.IsConnected == true) {
+            transform.Translate (straffe, 0, translation);
+        }
+
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) {
             return;
         }
 
         if (Input.GetKeyDown ("escape"))
             Cursor.lockState = CursorLockMode.None;
-        
+
     }
 
 }
