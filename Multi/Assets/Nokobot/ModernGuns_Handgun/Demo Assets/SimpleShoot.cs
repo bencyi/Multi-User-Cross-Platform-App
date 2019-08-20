@@ -20,6 +20,7 @@ public class SimpleShoot : MonoBehaviour
             barrelLocation = transform;
     }
 
+
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
