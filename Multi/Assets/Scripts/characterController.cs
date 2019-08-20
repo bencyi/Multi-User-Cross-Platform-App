@@ -34,6 +34,11 @@ public class characterController : MonoBehaviourPun {
 
     // Update is called once per frame
     void Update () {
+
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) {
+            return;
+        }
+
         if (photonView.IsMine) {
             if (myCam.enabled == false)
                 myCam.enabled = true;
@@ -44,10 +49,6 @@ public class characterController : MonoBehaviourPun {
             straffe *= Time.deltaTime;
 
             transform.Translate (straffe, 0, translation);
-        }
-
-        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) {
-            return;
         }
 
         if (Input.GetKeyDown ("escape"))
