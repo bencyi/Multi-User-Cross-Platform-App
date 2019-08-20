@@ -1378,7 +1378,6 @@ GameObject:
   - component: {fileID: 3772696755917717104}
   - component: {fileID: 3772696755917717109}
   - component: {fileID: 3772696755917717108}
-  - component: {fileID: -6880330864833734966}
   m_Layer: 0
   m_Name: rigging2
   m_TagString: Untagged
@@ -1502,18 +1501,6 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 1
   isRuntimeInstantiated: 0
---- !u!122 &-6880330864833734966
-Halo:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5150607947292813173}
-  m_Enabled: 1
-  m_Color:
-    serializedVersion: 2
-    rgba: 4278190335
-  m_Size: 5
 --- !u!1 &5716647392192829255
 GameObject:
   m_ObjectHideFlags: 0

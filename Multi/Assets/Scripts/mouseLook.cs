@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class mouseLook : MonoBehaviour {
+public class mouseLook : MonoBehaviourPun {
 
 //Keeps track of how much movement camera has made, total movement
     Vector2 mouseLookVar;
@@ -28,6 +29,7 @@ public class mouseLook : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if(photonView.IsMine) {
         //Gets change of mouse movement since last update (mousse delta)
         var md = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
@@ -48,6 +50,6 @@ public class mouseLook : MonoBehaviour {
 
         //Movement left and right rotated around y
         character.transform.localRotation = Quaternion.AngleAxis(mouseLookVar.x, character.transform.up);
-        
+        }
     }
 }
