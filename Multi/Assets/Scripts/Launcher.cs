@@ -126,7 +126,7 @@ namespace Com.MyCompany.MyGame {
 
 
                 if(PhotonNetwork.CurrentRoom.PlayerCount == 1) {
-                Debug.Log ("We load the 'Game' ");
+                    Debug.Log ("We load the 'Game' ");
                     PhotonNetwork.LoadLevel ("Game");
                 }
             }
