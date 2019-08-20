@@ -39,11 +39,9 @@ public class characterController : MonoBehaviourPun {
             return;
         }
 
-        if (!photonView.IsMine) {
+        if (photonView.IsMine) {
             if (myCam.enabled == false)
                 myCam.enabled = true;
-        }
-        if (photonView.IsMine) {
 
             float translation = Input.GetAxis ("Vertical") * speed;
             float straffe = Input.GetAxis ("Horizontal") * speed;
