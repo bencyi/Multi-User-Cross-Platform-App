@@ -56,4 +56,16 @@ public class characterController : MonoBehaviourPun {
 
     }
 
+    public class PlayerManager : MonoBehaviourPunCallbacks, IPunObservable
+{
+    #region IPunObservable implementation
+
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+    }
+
+
+    #endregion
+
 }
