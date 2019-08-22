@@ -51,27 +51,21 @@ namespace Com.MyCompany.MyGame {
                     Debug.LogFormat ("We are Instantiating LocalPlayer from {0}", Application.loadedLevelName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                     PhotonNetwork.Instantiate (this.playerPrefab.name, new Vector3 (0f, 5f, 0f), Quaternion.identity, 0);
-
-                    if(PhotonNetwork.CurrentRoom.PlayerCount == 1) {
-                        PhotonNetwork.Instantiate("Cubes 1", new Vector3(0, 0, 3), Quaternion.identity, 0);
-                    }
-                }
-
-                else {
-                    Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+                    PhotonNetwork.InstantiateSceneObject ("Cubes 1", new Vector3 (0, 0, 3), Quaternion.identity, 0);
+                } else {
+                    Debug.LogFormat ("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
                 }
             }
         }
 
+        [PunRPC]
         void LoadArena () {
             if (!PhotonNetwork.IsMasterClient) {
                 Debug.LogError ("PhotonNetwork : Trying to Load a level but we are not the master Client");
             }
 
-            Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);  
+            Debug.LogFormat ("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
             PhotonNetwork.LoadLevel ("Game");
-
-            
 
         }
 
