@@ -8,6 +8,13 @@ public class characterController : MonoBehaviourPunCallbacks {
     [Tooltip ("The local player instance. Use this to know if the local player is represented in the Scene")]
     public static GameObject LocalPlayerInstance;
 
+<<<<<<< Updated upstream:Multi/Assets/characterController.cs
+=======
+    Animator m_Animator;
+
+    public Camera myCam;
+
+>>>>>>> Stashed changes:Multi/Assets/Scripts/characterController.cs
     public float speed = 10.0F;
 
     //public GameObject explosionEffect;
@@ -16,6 +23,7 @@ public class characterController : MonoBehaviourPunCallbacks {
 
     // Start is called before the first frame update
     void Start () {
+        m_Animator = GetComponent<Animator> ();
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -37,7 +45,34 @@ public class characterController : MonoBehaviourPunCallbacks {
         translation *= Time.deltaTime;
         straffe *= Time.deltaTime;
 
+<<<<<<< Updated upstream:Multi/Assets/characterController.cs
         transform.Translate (straffe, 0, translation);
+=======
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) {
+            return;
+        }
+
+        if (photonView.IsMine) {
+            if (myCam.enabled == false)
+                myCam.enabled = true;
+
+            float translation = Input.GetAxis ("Vertical") * speed;
+            float straffe = Input.GetAxis ("Horizontal") * speed;
+            translation *= Time.deltaTime;
+            straffe *= Time.deltaTime;
+
+            transform.Translate (straffe, 0, translation);
+
+            bool hasHorizontalInput = !Mathf.Approximately (straffe, 0f);
+
+            bool hasVerticalInput = !Mathf.Approximately (translation, 0f);
+
+            //isWalking if moving horizontally or vertically
+            bool isWalking = hasHorizontalInput || hasVerticalInput;
+
+            m_Animator.SetBool ("isWalking", isWalking);
+        }
+>>>>>>> Stashed changes:Multi/Assets/Scripts/characterController.cs
 
         if (Input.GetKeyDown ("escape"))
             Cursor.lockState = CursorLockMode.None;

@@ -13,6 +13,8 @@ namespace Com.MyCompany.MyGame {
         [Tooltip ("The prefab to use for representing the player")]
         public GameObject playerPrefab;
 
+        public GameObject vrPrefab;
+
         public static GameManager Instance;
 
         #region Photon Callbacks
@@ -48,13 +50,33 @@ namespace Com.MyCompany.MyGame {
             } else {
 
                 if (characterController.LocalPlayerInstance == null) {
+
+#if UNITY_STANDALONE_WIN
+                    PhotonNetwork.Instantiate (this.playerPrefab.name, new Vector3 (0f, 5f, 0f), Quaternion.identity, 0);
+
+#endif
+
+#if UNITY_STANDALONE_OSX
+                    PhotonNetwork.Instantiate (this.playerPrefab.name, new Vector3 (0f, 5f, 0f), Quaternion.identity, 0);
+#endif
+
+#if UNITY_ANDROID
+
+                    PhotonNetwork.Instantiate (this.vrPrefab.name, new Vector3 (0f, 5f, 0f), Quaternion.identity, 0);
+#endif
                     Debug.LogFormat ("We are Instantiating LocalPlayer from {0}", Application.loadedLevelName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
+<<<<<<< Updated upstream
                     PhotonNetwork.Instantiate (this.playerPrefab.name, new Vector3 (0f, 5f, 0f), Quaternion.identity, 0);
                 }
 
                 else {
                     Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+=======
+
+                } else {
+                    Debug.LogFormat ("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
+>>>>>>> Stashed changes
                 }
             }
         }

@@ -7,6 +7,9 @@ using UnityEngine;
 namespace Com.MyCompany.MyGame {
     public class Launcher : MonoBehaviourPunCallbacks {
 
+        public GameObject vrCamera;
+        public Camera camera;
+
         [Tooltip ("The Ui Panel to let the user enter name, connect and play")]
         [SerializeField]
         private GameObject controlPanel;
@@ -47,6 +50,7 @@ namespace Com.MyCompany.MyGame {
         /// MonoBehaviour method called on GameObject by Unity during early initialization phase.
         /// </summary>
         void Awake () {
+
             // #Critical
             // this makes sure we can use PhotonNetwork.LoadLevel() on the master client and all clients in the same room sync their level automatically
             PhotonNetwork.AutomaticallySyncScene = true;
@@ -56,6 +60,22 @@ namespace Com.MyCompany.MyGame {
         /// MonoBehaviour method called on GameObject by Unity during initialization phase.
         /// </summary>
         void Start () {
+
+#if UNITY_STANDALONE_WIN
+            camera.enabled = true;
+            Debug.Log ("Enabling camera for windows");
+#endif
+
+#if UNITY_STANDALONE_OSX
+            camera.enabled = true;
+            Debug.Log ("Enabling camera for Mac");
+#endif
+
+#if UNITY_ANDROID
+            vrCamera.SetActive (true);
+            Debug.Log ("Enabling camera for Android");
+#endif
+
             progressLabel.SetActive (false);
             controlPanel.SetActive (true);
         }
@@ -80,7 +100,7 @@ namespace Com.MyCompany.MyGame {
             // we check if we are connected or not, we join if we are , else we initiate the connection to the server.
             if (PhotonNetwork.IsConnected) {
                 // #Critical we need at this point to attempt joining a Random Room. If it fails, we'll get notified in OnJoinRandomFailed() and we'll create one.
-                PhotonNetwork.JoinRandomRoom();
+                PhotonNetwork.JoinRandomRoom ();
             } else {
                 // #Critical, we must first and foremost connect to Photon Online Server.
                 PhotonNetwork.GameVersion = gameVersion;
@@ -100,7 +120,7 @@ namespace Com.MyCompany.MyGame {
             // we don't want to do anything.
             if (isConnecting) {
                 // #Critical: The first we try to do is to join a potential existing room. If there is, good, else, we'll be called back with OnJoinRandomFailed()
-                PhotonNetwork.JoinRandomRoom();
+                PhotonNetwork.JoinRandomRoom ();
             }
         }
 
@@ -123,14 +143,21 @@ namespace Com.MyCompany.MyGame {
 
         public override void OnJoinedRoom () {
             Debug.Log ("PUN Basics Tutorial/Launcher: OnJoinedRoom() called by PUN. Now this client is in a room.");
+            Debug.Log(PhotonNetwork.CurrentRoom.PlayerCount);
 
+<<<<<<< Updated upstream
             // #Critical: We only load if we are the first player, else we rely on `PhotonNetwork.AutomaticallySyncScene` to sync our instance scene.
                 Debug.Log ("We load the 'Game' ");
 
                 // #Critical
                 // Load the Room Level.
+=======
+            if (PhotonNetwork.CurrentRoom.PlayerCount == 1) {
+                Debug.Log ("We load the 'Game' ");
+>>>>>>> Stashed changes
                 PhotonNetwork.LoadLevel ("Game");
             }
         }
-
     }
+
+}
